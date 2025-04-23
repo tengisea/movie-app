@@ -10,7 +10,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { log } from "console";
 
 type Genre = {
   id: number;
@@ -24,7 +23,6 @@ const getMoviesGenre = async () => {
 };
 export const GenresDropDown = async () => {
   const genre = await getMoviesGenre();
-  console.log(genre);
   
   return (
     <div>
@@ -32,7 +30,7 @@ export const GenresDropDown = async () => {
         <DropdownMenuTrigger asChild>
           <Button variant="outline">
             <ChevronDown size={16} color="#000000" />
-            Genre
+            <span className="hidden md:block">Genre</span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-144.25 p-5">

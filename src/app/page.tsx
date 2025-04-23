@@ -8,7 +8,6 @@ const getPopularMovies = async () => {
 
 const Home = async () => {
   const popularM = await getPopularMovies();
-  // console.log(popularM);
 
   return (
     <div>

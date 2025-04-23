@@ -1,27 +1,23 @@
-import { Film, Search, Moon } from "lucide-react";
-import { GenresDropDown } from "./GenresDropDown";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+"use client"
+import { usePathname } from "next/navigation";
+import { SearchForOtherPages, SearchForSearchPage } from "../Search";
+import { MovieZLogo, ThemeSwitch } from "../Button";
 
 export const Header = () => {
+
+  const pathname = usePathname()
+
   return (
-    <div className="flex px-4 justify-between items-center">
-      <header className="flex text-[#4338CA] font-bold gap-2">
-        <Film size={20} color="#4338CA" /> Movie Z
-      </header>
+    <div className="flex py-[7.5] md:py-[11.5px] px-5 md:px-20 md:justify-between items-center">
+      <MovieZLogo/>
 
-      <div className="flex gap-3">
-        <GenresDropDown />
+      {pathname === "/search" ? (
+        <SearchForSearchPage />
+      ) : (
+        <SearchForOtherPages />
+      )}
 
-        <div className="flex">
-          <Search size={16} color="#ada9a9" />
-          <Input placeholder="Search" />
-        </div>
-      </div>
-
-      <Button variant="outline" size="icon">
-        <Moon />
-      </Button>
+      <ThemeSwitch />
     </div>
   );
 };
