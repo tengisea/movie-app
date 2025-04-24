@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils"
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (
     <input
-    //  <Search size={16} color="#ada9a9" />
       type={type}
       data-slot="input"
       className={cn(

@@ -1,2 +1,2 @@
-export * from "./GenresDropDown"
+export * from "../Genre/GenresDropDown"
 export * from "./Header";

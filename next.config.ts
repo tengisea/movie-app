@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
     TMDB_BASE_URL: process.env.TMDB_BASE_URL,
     TMDB_UPCOMING: process.env.TMDB_UPCOMING,
     TMDB_IMAGE_SERVICE_URL: process.env.TMDB_IMAGE_SERVICE_URL,
+    TMDB_POPULAR: process.env.TMDB_POPULAR,
+    TMDB_TOP_RATED: process.env.TMDB_TOP_RATED
   },
 };
 

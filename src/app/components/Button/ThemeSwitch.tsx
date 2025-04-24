@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 
 export const ThemeSwitch = () => {
   return (
-    <Button variant="outline" size="icon">
-      <Moon />
-    </Button>
+    <div className="ml-3">
+      <Button variant="outline" size="icon">
+        <Moon />
+      </Button>
+    </div>
   );
 };

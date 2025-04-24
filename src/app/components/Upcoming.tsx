@@ -1,12 +1,12 @@
 import { axiosInstance } from "@/lib/axios-instance";
 import { Key, Star } from "lucide-react";
-import { MovieImage } from "./Movie";
+import { MovieCard, MovieImage, MovieTitle } from "./Movie";
 
 type Upcoming = {
   id: number;
   poster_path: string;
-  rating: number;
-  title: string;
+  vote_average: number;
+  original_title: string;
 };
 
 const getUpcomingMovies = async () => {
@@ -17,11 +17,11 @@ const getUpcomingMovies = async () => {
 export const Upcoming = async () => {
   const upcoming = await getUpcomingMovies();
   console.log("upcoming", upcoming);
-  // <Star size={16} color="#fff700" strokeWidth={3} />;
 
   return (
     <>
-      <header className="">
+    <MovieCard/>
+      {/* <header className="">
         <div className="text-2xl font-semibold">Upcoming</div>
         <div></div>
       </header>
@@ -30,6 +30,15 @@ export const Upcoming = async () => {
           <MovieImage key={id} posterPath={poster_path} />
         ))}
       </div>
+        <div className="flex">
+          {upcoming.map(({ id, vote_average, original_title }) => (
+            <MovieTitle
+              key={id}
+              voteAverage={vote_average}
+              originalTitle={original_title}
+            />
+          ))}
+        </div> */}
     </>
   );
 };

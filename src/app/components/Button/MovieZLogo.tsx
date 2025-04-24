@@ -3,7 +3,7 @@ import { Film } from "lucide-react";
 
 export const MovieZLogo = () => {
   return (
-    <Button variant="outline" className="drop-shadow-">
+    <Button variant={"ghost"} className="drop-shadow-">
       <Film size={20} /> Movie Z
     </Button>
   );
