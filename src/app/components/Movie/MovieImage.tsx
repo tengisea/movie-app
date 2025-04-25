@@ -5,14 +5,12 @@ type MovieImageType = {
 
 export const MovieImage = ({
   posterPath,
-  imageWidth = "w500",
+  imageWidth = "w185",
 }: MovieImageType) => {
   const imageUrl = `${process.env.TMDB_IMAGE_SERVICE_URL}/${imageWidth}${posterPath}`;
   return (
-    <div className="relative overflow-hidden">
-      <img src={imageUrl} alt="" className="object-cover" />
-      <div className="inset-0 z-10 transition-all duration-300 group-hover:bg-primary/30">
-      </div>
+    <div className="position overflow-hidden w-full hover:opacity-30 rounded-t-lg">
+      <img src={imageUrl} alt="" className="object-cover w-full " />
     </div>
   );
 };

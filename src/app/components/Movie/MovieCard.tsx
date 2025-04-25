@@ -1,54 +1,18 @@
 import { axiosInstance } from "@/lib/axios-instance";
 import { MovieImage, MovieTitle } from ".";
 
-type Upcoming = {
-  id: number;
-  poster_path: string;
-  vote_average: number;
-  original_title: string;
-};
-type Popular = {
-  id: number;
-  poster_path: string;
-  vote_average: number;
-  original_title: string;
-};
-
-const getUpcomingMovies = async () => {
-  const { data } = await axiosInstance("/movie/upcoming?language=en-US&page=1");
-  return data.results as Upcoming[];
-};
-
-const getPopularMovies = async () => {
-  const { data } = await axiosInstance("/movie/popular?language=en-US&page=1");
-  return data.results as Popular[];
-};
-
-export const MovieCard = async () => {
-  const upcoming = await getUpcomingMovies();
-    const popular = await getPopularMovies();
-  console.log("upcoming", upcoming);
-
+export const MovieCard = ({
+  poster_path,
+  vote_average,
+  original_title,
+}: MovieDetail) => {
   return (
-    <>
-      <header className="">
-        <div className="text-2xl font-semibold"></div>
-        <div></div>
-      </header>
-      <div className="flex">
-        {popular.map(({ id, poster_path }) => (
-          <MovieImage key={id} posterPath={poster_path} />
-        ))}
+    <div className="rounded-lg flex flex-col items-start gap-1 bg-[#F4F4F5] dark:bg-[#27272A] ">
+      <MovieImage posterPath={poster_path} />
+
+      <div className="flex flex-col py-1 px-2 items-start self-stretch text-wrap line-clamp-2 wrap-break-word">
+        <MovieTitle voteAverage={vote_average} originalTitle={original_title} />
       </div>
-      <div className="flex">
-        {popular.map(({ id, vote_average, original_title }) => (
-          <MovieTitle
-            key={id}
-            voteAverage={vote_average}
-            originalTitle={original_title}
-          />
-        ))}
-      </div>
-    </>
+    </div>
   );
 };

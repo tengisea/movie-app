@@ -3,8 +3,8 @@ import { Search } from "lucide-react";
 
 export const SearchInput = () => {
   return (
-    <div className="flex items-center gap-2.5 bg-white px-3 ">
-      <Search opacity={0.5} />
+    <div className="flex items-center gap-2.5 bg-white dark:bg-black px-3 border-1 rounded w-fit ">
+      <Search opacity={0.5} size={16}/>
       <input
         type="text"
         placeholder="Search"

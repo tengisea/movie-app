@@ -13,10 +13,9 @@ export const SearchForOtherPages = () => {
     setShowSearch(!showSearch);
   };
   return (
-    <div className="flex items-center flex-1 md:flex gap-x-3">
-      <div className="hidden lg:flex">
+    <div className="flex items-center justify-between md:justify-center flex-1 md:flex gap-x-3">
+      <div className="hidden lg:flex gap-3">
         <GenresDropDown />
-
         <SearchInput />
       </div>
 
@@ -24,7 +23,7 @@ export const SearchForOtherPages = () => {
         variant={"outline"}
         className="flex md:hidden ml-auto"
         onClick={handleSearchButtonClick}>
-        <Search size={16}/>
+        <Search size={16} />
       </Button>
 
       <AnimatePresence>
@@ -36,7 +35,7 @@ export const SearchForOtherPages = () => {
             exit="exit"
             className="z-10 absolute inset-x-0 flex md:hidden px-5 py-[7.5px] gap-3  bg-white">
             <GenresDropDown />
-
+utas
             <SearchInput />
             <Button variant={"ghost"} onClick={handleSearchButtonClick}>
               <X />

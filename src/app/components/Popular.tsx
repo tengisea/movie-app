@@ -1,43 +1,22 @@
 import { axiosInstance } from "@/lib/axios-instance";
 import { MovieCard, MovieImage, MovieTitle } from "./Movie";
 
-type Popular = {
-  id: number;
-  poster_path: string;
-  vote_average: number;
-  original_title: string;
+type PopularProps = {
+  popular: MovieDetail[];
 };
 
-const getPopularMovies = async () => {
-  const { data } = await axiosInstance("/movie/popular?language=en-US&page=1");
-  return data.results as Popular[];
-};
-
-export const Popular = async () => {
-  const popular = await getPopularMovies();
-  console.log("poular", popular);
-
+export const Popular = async ({ popular }: PopularProps) => {
   return (
-    <>
-    <MovieCard/>
-      {/* <header className="">
-        <div className="text-2xl font-semibold">Upcoming</div>
-        <div></div>
+    <div className="px-20 flex flex-col gap-8">
+      <header className="">
+        <div className="text-2xl font-semibold">Popular</div>
       </header>
-      <div className="flex">
-        {upcoming.map(({ id, poster_path }) => (
-          <MovieImage key={id} posterPath={poster_path} />
+
+      <div className="flex items-start content-start self-stretch flex-wrap gap-8 ">
+        {popular.map((movie, index) => (
+          <MovieCard key={index} {...movie} />
         ))}
       </div>
-        <div className="flex">
-          {upcoming.map(({ id, vote_average, original_title }) => (
-            <MovieTitle
-              key={id}
-              voteAverage={vote_average}
-              originalTitle={original_title}
-            />
-          ))}
-        </div> */}
-    </>
+    </div>
   );
 };

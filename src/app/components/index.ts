@@ -4,4 +4,5 @@ export * from "./TopRated";
 export * from "./Upcoming";
 export * from "./Movie";
 export * from "./Button";
-export * from "./Search"
+export * from "./Search";
+export * from "./Footer"
