@@ -1,4 +1,6 @@
+import { SeeMore } from "./Button";
 import { MovieCard} from "./Movie";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type UpcomingProps = {
   upcoming: MovieDetail[];
@@ -6,12 +8,13 @@ type UpcomingProps = {
 
 export const Upcoming = ({ upcoming }: UpcomingProps) => {
   return (
-    <div className="px-20 flex flex-col gap-8">
-      <header className="">
+    <div className="px-5 md:px-20 flex flex-col gap-8">
+      <header className="flex justify-between items-start">
         <div className="text-2xl font-semibold">Upcoming</div>
+        <SeeMore />
       </header>
 
-      <div className="flex items-start content-start self-stretch flex-wrap gap-8 ">
+      <div className="flex items-start content-start self-stretch flex-wrap gap-5 md:gap-8 ">
         {upcoming.map((movie, index) => (
           <MovieCard key={index} {...movie} />
         ))}

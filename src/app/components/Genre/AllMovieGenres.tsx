@@ -21,11 +21,11 @@ export const AllMovieGenres = () => {
       {genres.map(({ id, name }) => {
         return (
           <Badge
-          variant={"outline"}
+            variant={"outline"}
             key={id}
-            className="px-1.5 font-bold border-1 border-solid border-[#E4E4E7] rounded-full ">
+            className="px-1.5 font-bold border-1 border-solid border-[#E4E4E7] dark:border-[#27272A] rounded-full ">
             {name}
-            <ChevronRight size={16} color="#000000" className="ml-2" />
+            <ChevronRight size={16} className="ml-2" />
           </Badge>
         );
       })}

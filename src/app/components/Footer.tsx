@@ -4,12 +4,12 @@ import { Mail, Phone } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <div className=" bg-[#4338CA] flex gap-200  items-start py-10 px-20 h-60">
+    <div className=" bg-[#4338CA] flex gap-7  flex-col md:flex-row justify-between p-10 md:py-10 px-10 md:px-20">
       <div className="flex flex-col gap-3 items-start">
         <MovieZLogo />
-        <div className="text-xs">© 2024 Movie Z. All Rights Reserved.</div>
+        <div className="text-xs ">© 2024 Movie Z. All Rights Reserved.</div>
       </div>
-      <div className="flex gap-24 text-sm">
+      <div className="flex gap-12 md:gap-24 text-sm">
         <div className="flex flex-col gap-3">
           <div>Contact information</div>
           <div className="flex gap-3">
@@ -31,9 +31,9 @@ export const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 items-start">
           <div>Follow us</div>
-          <div className="flex gap-3">
+          <div className="flex flex-col md:flex-row gap-3 font-semibold ">
             <a href="">Facebook</a>
             <a href="">Instagram</a>
             <a href="">Twitter</a>

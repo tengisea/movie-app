@@ -14,7 +14,7 @@ export const SearchForOtherPages = () => {
   };
   return (
     <div className="flex items-center justify-between md:justify-center flex-1 md:flex gap-x-3">
-      <div className="hidden lg:flex gap-3">
+      <div className="hidden md:flex gap-3">
         <GenresDropDown />
         <SearchInput />
       </div>

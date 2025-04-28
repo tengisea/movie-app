@@ -8,3 +8,10 @@ type MovieDetail = {
   vote_average: number;
   original_title: string;
 };
+
+type MovieInfo = {
+  title: string;
+  vote_average: number;
+  overview: string;
+  backdrop_path:string;
+};

@@ -5,7 +5,7 @@ type MovieImageType = {
 
 export const MovieImage = ({
   posterPath,
-  imageWidth = "w185",
+  imageWidth = "w154",
 }: MovieImageType) => {
   const imageUrl = `${process.env.TMDB_IMAGE_SERVICE_URL}/${imageWidth}${posterPath}`;
   return (
