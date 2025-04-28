@@ -4,15 +4,16 @@ type MovieInfoType = {
   title: string;
   vote_average: number;
   overview: string;
+  backdrop_path: string;
 };
 
-export const AboutMovie = ({ title, vote_average, overview }: MovieInfoType) => {
+export const AboutMovie = ({ title, vote_average, overview, backdrop_path }: MovieInfoType) => {
   const originalTitle = `${title}`;
   const vote = Number(`${vote_average}`);
   const voteSimplifier = Math.round(Number(vote * 10)) / 10;
-
+  const backdropUrl = `https://image.tmdb.org/t/p/original${backdrop_path}`;
   return (
-    <div>
+    <div  >
       <div className="flex">Now Playing:</div>
       <h1 className="text-4xl font-bold">{originalTitle}</h1>
 

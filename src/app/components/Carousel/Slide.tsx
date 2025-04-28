@@ -18,10 +18,14 @@ type NowPlaying = {
   overview: string;
   backdrop_path:string;
 };
-
 export const Slide = ()=> {
 const { data } = useFetchDataInClient( "/movie/now_playing?language=en-US&page=1");      
-  const nowPlaying = data?.nowPlaying ?? []
+  const nowPlaying: NowPlaying[] = data?.results?.map((movie: any) => ({
+    title: movie.title,
+    vote_average: movie.vote_average,
+    overview: movie.overview,
+    backdrop_path: movie.backdrop_path,
+  })) ?? [];
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   );
@@ -33,26 +37,24 @@ const { data } = useFetchDataInClient( "/movie/now_playing?language=en-US&page=1
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}>
       <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index}>
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <div className="">
-                    {nowPlaying.map((title, index, vote_average, overview) => (
-                      <AboutMovie
-                        key={index}
-                        title={title}
-                        vote_average={vote_average}
-                        overview={}
-                      />
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
-        ))}
+        {nowPlaying.map(
+          ({ title, vote_average, overview, backdrop_path }, index) => (
+            <CarouselItem key={index}>
+              <div className="p-1">
+                <Card>
+                  <CardContent className="flex aspect-square items-center justify-center p-6">
+                    <AboutMovie
+                      title={title}
+                      vote_average={vote_average}
+                      overview={overview}
+                      backdrop_path={backdrop_path}
+                    />
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          )
+        )}
       </CarouselContent>
       <CarouselPrevious />
       <CarouselNext />
