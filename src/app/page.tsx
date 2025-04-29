@@ -1,20 +1,19 @@
 import { axiosInstance } from "@/lib/axios-instance";
-import { Footer, Header, Popular, TopRated, Upcoming } from "./components";
-import { Slide } from "./components/Carousel";
+import { Footer, Header, Popular, TopRated, Upcoming } from "../components";
+import { Slide } from "../components/Carousel";
 
 const getPopularMovies = async () => {
-  const { data } = await axiosInstance("/movie/popular?language=en-US&page=1");
+  const { data } = await axiosInstance(process.env.TMDB_POPULAR);
   return data.results;
 };
 const getUpcomingMovies = async () => {
-  const { data } = await axiosInstance("/movie/upcoming?language=en-US&page=1");
+  const { data } = await axiosInstance(process.env.TMDB_UPCOMING);
   return data.results as MovieDetail[];
 };
 const getTopRatedMovies = async () => {
   const { data } = await axiosInstance(
-    "/movie/top_rated?language=en-US&page=1"
-  );
-  return data.results as MovieDetail[];
+    process.env.TMDB_TOP_RATED
+  );return data.results as MovieDetail[];
 };
 
 const Home = async () => {

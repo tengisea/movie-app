@@ -8,7 +8,9 @@ const nextConfig: NextConfig = {
     TMDB_UPCOMING: process.env.TMDB_UPCOMING,
     TMDB_IMAGE_SERVICE_URL: process.env.TMDB_IMAGE_SERVICE_URL,
     TMDB_POPULAR: process.env.TMDB_POPULAR,
-    TMDB_TOP_RATED: process.env.TMDB_TOP_RATED
+    TMDB_TOP_RATED: process.env.TMDB_TOP_RATED,
+    TMDB_MOVIE_DETAIL: process.env.TMDB_MOVIE_DETAIL,
+    TMDB_MOVIE_GENRE: process.env.TMDB_MOVIE_GENRE
   },
 };
 

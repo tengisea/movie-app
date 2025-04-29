@@ -13,7 +13,7 @@ export const AboutMovie = ({ title, vote_average, overview, backdrop_path }: Mov
   const voteSimplifier = Math.round(Number(vote * 10)) / 10;
   const backdropUrl = `https://image.tmdb.org/t/p/original${backdrop_path}`;
   return (
-    <div  >
+    <div>
       <div className="flex">Now Playing:</div>
       <h1 className="text-4xl font-bold">{originalTitle}</h1>
 
