@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { SearchForOtherPages, SearchForSearchPage } from "../Search";
-import { MovieZLogo, ThemeSwitch } from "../Button";
+import { SearchForOtherPages, SearchForSearchPage } from "./Search";
+import { MovieZLogo, ThemeSwitch } from "./Button";
 
 export const Header = () => {
   const pathname = usePathname();

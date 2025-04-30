@@ -1,7 +1,7 @@
 "use client";
 import { AnimatePresence, motion } from "framer";
 import { SearchInput } from "./SearchInput";
-import { GenresDropDown } from "../Header";
+import { GenresDropDown } from "../Genre";
 import { searchBarAnimationVarients } from "../constants/search-bar-animation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";

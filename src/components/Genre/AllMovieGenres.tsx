@@ -5,6 +5,7 @@ import { GenresLoading } from "./GenresLoading";
 import { Badge } from "@/components/ui/badge";
 import { useURLSearchParams } from "@/hooks/useURLSearchParams";
 import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 type Genre = {
   id: number;
@@ -37,7 +38,10 @@ export const AllMovieGenres = () => {
             variant={"outline"}
             key={index}
             onClick={handleGenreSelection(genreId)}
-            className="px-1.5 font-bold border-1 border-solid border-[#E4E4E7] dark:border-[#27272A] rounded-full ">
+            className={cn(
+              "px-1.5 font-bold border-1 border-solid border-[#E4E4E7] dark:border-[#27272A] rounded-full",
+              isSelected && "bg-black text-white dark:bg-white dark:text-black"
+            )}>
             {name}
             {isSelected ? (
               <X size={16} className="ml-2" />

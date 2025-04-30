@@ -15,3 +15,21 @@ type MovieInfo = {
   overview: string;
   backdrop_path:string;
 };
+
+type MovieDetailProps = {
+  title: string;
+  genres: string;
+  vote_average: number;
+  poster_path: string;
+  release_date: string;
+  runtime: number;
+  overview: string;
+  backdrop_path: string;
+  vote_count:number;
+};
+
+type CastMovieProps= {
+  name: string;
+  crew:string;
+  
+}

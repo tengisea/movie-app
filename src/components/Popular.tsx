@@ -1,4 +1,3 @@
-
 import { MovieCard} from "./Movie";
 import { SeeMore } from "./Button";
 
