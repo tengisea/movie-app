@@ -14,7 +14,7 @@ export const Upcoming = ({ upcoming }: UpcomingProps) => {
         <SeeMore />
       </header>
 
-      <div className="flex items-start content-start self-stretch flex-wrap gap-5 md:gap-8 ">
+      <div className="flex justify-center flex-wrap gap-5 md:gap-8 ">
         {upcoming.map((movie, index) => (
           <MovieCard key={index} {...movie} />
         ))}

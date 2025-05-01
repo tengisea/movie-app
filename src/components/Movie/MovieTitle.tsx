@@ -17,7 +17,7 @@ export const MovieTitle = ({ originalTitle, voteAverage }: MovieTitleType) => {
         <div className="text-small font-medium">{voteSimplifier}</div>
         <div className="text-[#71717A]">/10</div>
       </div>
-      <div className="text-lg overflow-ellipsis line-clamp-2 break-all w-[141px] lg:w-[243px] h-14">
+      <div className="text-lg overflow-ellipsis line-clamp-2 break-all w-[128px] md:w-[243px] h-14">
         {title}
       </div>
     </div>

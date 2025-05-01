@@ -12,24 +12,25 @@ export const MovieDetail = ({ detail, cast }: DetailProps) => {
   const vote = Number(`${detail.vote_average}`);
   const posterPath = detail.poster_path;
   const voteSimplifier = Math.round(Number(vote * 10)) / 10;
-  const imageUrl = `${process.env.TMDB_IMAGE_SERVICE_URL}/w342${posterPath}`;
+  const imageUrl = `${process.env.TMDB_IMAGE_SERVICE_URL}/original${posterPath}`;
+  const phoneImageurl = `${process.env.TMDB_IMAGE_SERVICE_URL}/original${posterPath}`;
   const trailer = `/movie/${detail.id}/videos?language=en-US`;
   const genres= detail.genres
 
   return (
-    <div className="flex flex-col px-30 gap-6">
-      <div className="flex justify-between">
+    <div className="flex flex-col px-5 md:px-30 gap-6">
+      <div className="flex gap-10 md:justify-between">
         <div>
-          <div className="font-bold text-4xl">{detail.title}</div>
+          <div className="font-bold text-2xl md:text-4xl">{detail.title}</div>
           <div className="text-lg">
             {detail.release_date} • {detail.runtime}m
           </div>
         </div>
         <div className="font-xs ">
-          Rating
+          <div className="hidden md:block">Rating</div>
           <div className="flex gap-1">
             <div className="flex items-center">
-              <Star size={28} fill="#FDE047" color="#FDE047"  />
+              <Star size={28} fill="#FDE047" color="#FDE047" />
             </div>
             <div>
               <div className="flex text-lg font-semibold items-center">
@@ -41,34 +42,54 @@ export const MovieDetail = ({ detail, cast }: DetailProps) => {
           </div>
         </div>
       </div>
-      <img src={imageUrl} width={290} height={428} alt="" />
-      <div className="flex flex-col gap-5">
-        <div className="flex gap-3">
-          {genres.map(({ id, name }, index) => {
-            const genreId = id.toString();
-            return (
-              <Badge
-                variant={"outline"}
-                key={index}
-                className="px-1.5 font-bold border-1 border-solid border-[#E4E4E7] dark:border-[#27272A] rounded-full">
-                {name}
-              </Badge>
-            );
-          })}
+      <div className="flex md:flex-col gap-8.5 ">
+        <div>
+          <img
+            src={imageUrl}
+            width={290}
+            height={428}
+            alt=""
+            className="hidden md:block"
+          />
+          <img
+            src={phoneImageurl}
+            width={100}
+            height={148}
+            alt=""
+            className="md:hidden max-w-100"
+          />
         </div>
-        <div>{detail.overview}</div>
+
+        <div className="flex self-stretch flex-wrap gap-5">
+          <div className="flex gap-3 self-stretch flex-wrap">
+            {genres.map(({ id, name }, index) => {
+              const genreId = id.toString();
+              return (
+                <Badge
+                  variant={"outline"}
+                  key={index}
+                  className="px-1.5 font-bold border-1 border-solid border-[#E4E4E7] dark:border-[#27272A] rounded-full">
+                  {name}
+                </Badge>
+              );
+            })}
+          </div>
+          <div>{detail.overview}</div>
+        </div>
+      </div>
+      <div className="flex flex-col gap-5">
         <div className="flex gap-13">
           <div className="font-bold w-16">Director</div>
           <div>{cast.crew[0].name}</div>
         </div>
         <div className="flex gap-13 ">
-          <div className="font-bold w-16">Writers</div>
+          <div className="font-bold w-17">Writers</div>
           <div>
             {cast.crew[1].name} · {cast.crew[2].name} · {cast.crew[3].name}
           </div>
         </div>
         <div className="flex gap-13">
-          <div className="font-bold w-16">Stars</div>
+          <div className="font-bold w-24">Stars</div>
           <div>
             {cast.cast[0].name} · {cast.cast[1].name} · {cast.cast[2].name}
           </div>

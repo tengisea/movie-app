@@ -12,12 +12,14 @@ import {
 import { AboutMovie } from "./AboutMovie";
 import { Button } from "../ui";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type NowPlaying = {
   title: string;
   vote_average: number;
   overview: string;
   backdrop_path: string;
+  id: number
 };
 export const Slide = () => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
@@ -34,7 +36,7 @@ export const Slide = () => {
       backdrop_path: movie.backdrop_path,
     })) ?? [];
   const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true })
+    Autoplay({ delay: 10000, stopOnInteraction: true })
   );
 
   useEffect(() => {
@@ -67,17 +69,17 @@ export const Slide = () => {
     }`,
   };
   return (
-    <div className="relative h-150 max-h-[600px] w-screen max-w-full flex justify-center overflow-hidden">
+    <div className="relative h-127.5 md:h-150 w-screen max-w-full flex justify-center overflow-hidden">
       <Carousel
         plugins={[plugin.current]}
-        className="w-screen h-96 max-h-[500px] relative z-0"
+        className="w-screen max-h-[550px]"
         setApi={setCarouselApi}
         opts={{ loop: true }}
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}>
         <CarouselContent>
           {nowPlaying.map(
-            ({ title, vote_average, overview, backdrop_path }, index) => (
+            ({ title, vote_average, overview, backdrop_path, id }, index) => (
               <CarouselItem key={index}>
                 <div className="">
                   <AboutMovie
@@ -85,6 +87,7 @@ export const Slide = () => {
                     vote_average={vote_average}
                     overview={overview}
                     backdrop_path={backdrop_path}
+                    id={id}
                   />
                 </div>
               </CarouselItem>
@@ -92,10 +95,10 @@ export const Slide = () => {
           )}
         </CarouselContent>
       </Carousel>
-      <div className="flex items-center">
+      <div className="flex ">
         <Button
           variant={"secondary"}
-          className={carouselClasses.previous}
+          className={cn(carouselClasses.previous, "hidden md:block")}
           onClick={() => carouselApi?.scrollPrev()}>
           <div>
             <ChevronLeft color="black" />
@@ -103,14 +106,14 @@ export const Slide = () => {
         </Button>
         <Button
           variant={"secondary"}
-          className={carouselClasses.next}
+          className={cn(carouselClasses.next, "hidden md:block")}
           onClick={() => carouselApi?.scrollNext()}>
           <div>
             <ChevronRight color="black" />
           </div>
         </Button>
       </div>
-      <div className="absolute left-2/5 top-9/10 flex space-x-2 z-20">
+      <div className="absolute top-14/15 flex space-x-2 justify-center items-end hidden md:block">
         {Array.from({ length: totalItems }).map((_, index) => (
           <button
             key={index}
