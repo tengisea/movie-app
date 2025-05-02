@@ -3,7 +3,7 @@ import { Footer, Header, Popular, TopRated, Upcoming } from "../components";
 import { Slide } from "../components/Carousel";
 
 const getPopularMovies = async () => {
-  const { data } = await axiosInstance(process.env.TMDB_POPULAR);
+  const { data} = await axiosInstance(process.env.TMDB_POPULAR);
   return data.results;
 };
 const getUpcomingMovies = async () => {

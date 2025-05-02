@@ -14,10 +14,9 @@ export const MoreLikeThis = ({ moreMovies }: MoreMovieProps) => {
 
       <div className="flex items-start justify-center self-stretch flex-wrap gap-8 ">
         {Array.isArray(moreMovies) &&
-          moreMovies.map((movie, index) => (
-            <MovieCard key={index} {...movie} 
-            />
-          ))}
+          moreMovies
+            .map((movie, index) => <MovieCard key={index} {...movie} />)
+            .slice(0, 5)}
       </div>
     </div>
   );

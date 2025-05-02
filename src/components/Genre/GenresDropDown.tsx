@@ -17,7 +17,7 @@ export const GenresDropDown = () => {
       <DropdownMenuTrigger asChild>
         <Button variant="outline"><ChevronDown/> <span className="hidden md:block">Genre</span></Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-144.25 p-5">
+      <DropdownMenuContent className="w-73.5 md:w-144.25 p-5">
         <DropdownMenuLabel className="font-bold">Genres</DropdownMenuLabel>
         <DropdownMenuLabel className="font-normal">
           See lists of movies by genre

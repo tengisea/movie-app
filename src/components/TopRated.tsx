@@ -16,7 +16,7 @@ export const TopRated = ({ topRated }: UpcomingProps) => {
       <div className="flex justify-center flex-wrap gap-8 ">
         {topRated.map((movie, index) => (
           <MovieCard key={index} {...movie} />
-        ))}
+        )).slice(0, 10)}
       </div>
     </div>
   );

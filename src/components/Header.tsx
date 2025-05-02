@@ -8,14 +8,16 @@ export const Header = () => {
 
   return (
     <div className="flex py-[7.5] md:py-[11.5px] px-5 md:px-20 md:justify-between items-center">
-      <MovieZLogo/>
+      <div className="text-[#4338CA]">
+        <MovieZLogo />
+      </div>
 
       {pathname === "/search" ? (
         <SearchForSearchPage />
       ) : (
         <SearchForOtherPages />
       )}
-      
+
       <ThemeSwitch />
     </div>
   );

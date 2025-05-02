@@ -33,9 +33,8 @@ export const SearchForOtherPages = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="z-10 absolute inset-x-0 flex md:hidden px-5 py-[7.5px] gap-3  bg-white">
+            className="z-10 absolute inset-x-0 flex md:hidden px-5 py-[7.5px] gap-3  bg-white dark:bg-black">
             <GenresDropDown />
-utas
             <SearchInput />
             <Button variant={"ghost"} onClick={handleSearchButtonClick}>
               <X />

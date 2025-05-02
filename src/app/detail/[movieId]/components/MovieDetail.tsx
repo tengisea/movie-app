@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { Play, Star } from "lucide-react";
 import { Badge } from "@/components/ui";
 
 type DetailProps = {
@@ -15,7 +15,10 @@ export const MovieDetail = ({ detail, cast }: DetailProps) => {
   const imageUrl = `${process.env.TMDB_IMAGE_SERVICE_URL}/original${posterPath}`;
   const phoneImageurl = `${process.env.TMDB_IMAGE_SERVICE_URL}/original${posterPath}`;
   const trailer = `/movie/${detail.id}/videos?language=en-US`;
-  const genres= detail.genres
+  const genres = detail.genres;
+  const backdropPath = detail.backdrop_path;
+  const backdropUrl = `${process.env.TMDB_IMAGE_SERVICE_URL}/original${backdropPath}`;
+console.log(trailer);
 
   return (
     <div className="flex flex-col px-5 md:px-30 gap-6">
@@ -43,7 +46,7 @@ export const MovieDetail = ({ detail, cast }: DetailProps) => {
         </div>
       </div>
       <div className="flex md:flex-col gap-8.5 ">
-        <div>
+        <div className="flex gap-2">
           <img
             src={imageUrl}
             width={290}
@@ -58,6 +61,16 @@ export const MovieDetail = ({ detail, cast }: DetailProps) => {
             alt=""
             className="md:hidden max-w-100"
           />
+          <div
+            className="w-[760px] h-107 relative opacity-50 rounded overflow-hidden bg-center bg-contain  bg-no-repeat"
+            style={{ backgroundImage: `url(${backdropUrl})` }}>
+            <div className="left-[24px] top-[364px] absolute inline-flex justify-start items-center gap-3" onClick={trailer}>
+              <div className="w-10 h-10 bg-white rounded-full flex justify-center items-center gap-2">
+                <Play color="black" size={16}/>
+              </div>
+              <div className="justify-start text-white">Play trailer </div>
+            </div>
+          </div>
         </div>
 
         <div className="flex self-stretch flex-wrap gap-5">

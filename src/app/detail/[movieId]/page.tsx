@@ -8,6 +8,7 @@ type DetailPageParams = {
   };
 };
 type MovieDetailProps = {
+  movieId: string;
   id: number;
 };
 
@@ -34,8 +35,6 @@ const DetailPage = async ({ params: { movieId } }: DetailPageParams) => {
   const detail = await getDetailMovie(movieId);
   const cast = await getCastMovie(movieId);
   const moreMovies = await getMoreMovies(movieId)
- console.log(moreMovies);
- 
 
   return (
     <div className="flex flex-col gap-15">

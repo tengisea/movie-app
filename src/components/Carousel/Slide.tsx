@@ -28,6 +28,7 @@ export const Slide = () => {
   const { data } = useFetchDataInClient(
     "/movie/now_playing?language=en-US&page=1"
   );
+
   const nowPlaying: NowPlaying[] =
     data?.results?.map((movie: any) => ({
       title: movie.title,
@@ -114,15 +115,17 @@ export const Slide = () => {
         </Button>
       </div>
       <div className="absolute top-14/15 flex space-x-2 justify-center items-end hidden md:block">
-        {Array.from({ length: totalItems }).map((_, index) => (
-          <button
-            key={index}
-            onClick={() => scrollToIndex(index)}
-            className={`w-2 h-2 rounded-full ${
-              currentIndex === index ? "bg-white" : "bg-gray-300"
-            }`}
-          />
-        ))}
+        {Array.from({ length: totalItems })
+          .map((_, index) => (
+            <button
+              key={index}
+              onClick={() => scrollToIndex(index)}
+              className={`w-2 h-2 rounded-full ${
+                currentIndex === index ? "bg-white" : "bg-gray-300"
+              }`}
+            />
+          ))
+          .slice(0, 5)}
       </div>
     </div>
   );

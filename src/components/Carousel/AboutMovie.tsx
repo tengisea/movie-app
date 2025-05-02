@@ -1,5 +1,8 @@
+"use client";
+
 import { Play, Star } from "lucide-react";
 import { Button } from "../ui";
+import { useRouter } from "next/navigation";
 
 type MovieInfoType = {
   title: string;
@@ -16,6 +19,11 @@ export const AboutMovie = ({
   backdrop_path,
   id,
 }: MovieInfoType) => {
+  const { push } = useRouter();
+
+  const handleGoToDetailPage = (id: string) => () => {
+    push(`/detail/${id}`);
+  };
   const originalTitle = `${title}`;
   const vote = Number(`${vote_average}`);
   const voteSimplifier = Math.round(Number(vote * 10)) / 10;
@@ -23,7 +31,7 @@ export const AboutMovie = ({
   const trailer = `/movie/${id}/videos?language=en-US`;
 
   return (
-    <div>
+    <div onClick={handleGoToDetailPage}>
       <div
         className="relative h-60.5 md:h-170 bg-origin-content bg-contain md:bg-cover md:bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${backdropUrl})` }}>
@@ -58,7 +66,7 @@ export const AboutMovie = ({
         </div>
         <div className="flex flex-col gap-5">
           <div className="text-sm max-w-xl w-75">{overview}</div>
-          <Button className="w-36.5" onClick={VideoFrame}>
+          <Button className="w-36.5">
             <Play /> Watch Trailer
           </Button>
         </div>

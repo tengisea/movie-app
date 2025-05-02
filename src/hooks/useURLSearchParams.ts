@@ -20,7 +20,7 @@ export const useURLSearchParams = () => {
 
     const newParams = queryParams.toString();
 
-    return `/?${newParams}`;
+    return `genre/?${newParams}`;
   };
 
   return { selectedGenresIds, generateQueryParams };

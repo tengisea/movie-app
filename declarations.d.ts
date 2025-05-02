@@ -2,34 +2,38 @@
 // see https://www.framer.com/docs/guides/handshake for more information.
 declare module "https://framer.com/m/*";
 
-type MovieDetail = {
-  id: number;
+type MovieInter = {
   poster_path: string;
   vote_average: number;
-  original_title: string;
 };
+
+type MovieDetail = {
+  id: number;
+  original_title: string;
+} & MovieInter;
 
 type MovieInfo = {
   title: string;
   vote_average: number;
   overview: string;
-  backdrop_path:string;
+  backdrop_path: string;
 };
 
 type MovieDetailProps = {
   title: string;
-  genres: string;
-  vote_average: number;
-  poster_path: string;
-  release_date: string;
-  runtime: number;
   overview: string;
   backdrop_path: string;
-  vote_count:number;
+  release_date: string;
+  runtime: number;
+  genres: string;
+  vote_count: number;
+} & MovieInter;
+
+type CastMovieProps = {
+  name: string;
+  crew: string;
 };
 
-type CastMovieProps= {
-  name: string;
-  crew:string;
-  
-}
+type SearchValue = {
+  searchValue: string;
+};
