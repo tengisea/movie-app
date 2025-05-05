@@ -8,6 +8,7 @@ type MovieInter = {
 };
 
 type MovieDetail = {
+  movieId: string;
   id: number;
   original_title: string;
 } & MovieInter;

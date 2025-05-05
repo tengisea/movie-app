@@ -1,3 +1,5 @@
+"use client";
+
 import { Play, Star } from "lucide-react";
 import { Badge } from "@/components/ui";
 
@@ -61,16 +63,42 @@ console.log(trailer);
             alt=""
             className="md:hidden max-w-100"
           />
-          <div
+          <div className="fixed inset-0 z-50 bg-black/70 items-center justify-center hidden" id="trailerModal">
+            <div className="relative w-[80vw] h-[80vh]">
+              <button 
+                onClick={() => {
+                  const modal = document.getElementById('trailerModal');
+                  if (modal) modal.classList.add('hidden');
+                  const iframe = document.querySelector('iframe');
+                  if (iframe) iframe.src = {trailer};
+                }}
+                className="absolute -top-8 right-0 text-white hover:text-gray-300"
+              >
+                Close
+              </button>
+              <iframe
+                width="100%"
+                height="100%"
+                src={trailer}
+                title="Movie Trailer"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+            <div onClick={() => {
+              const modal = document.getElementById('trailerModal');
+              if (modal) modal.classList.remove('hidden');
+            }}
             className="w-[760px] h-107 relative opacity-50 rounded overflow-hidden bg-center bg-contain  bg-no-repeat"
             style={{ backgroundImage: `url(${backdropUrl})` }}>
-            <div className="left-[24px] top-[364px] absolute inline-flex justify-start items-center gap-3" onClick={trailer}>
+            <div className="left-[24px] top-[364px] absolute inline-flex justify-start items-center gap-3">
               <div className="w-10 h-10 bg-white rounded-full flex justify-center items-center gap-2">
-                <Play color="black" size={16}/>
+              <Play color="black" size={16}/>
               </div>
               <div className="justify-start text-white">Play trailer </div>
             </div>
-          </div>
+            </div>
         </div>
 
         <div className="flex self-stretch flex-wrap gap-5">

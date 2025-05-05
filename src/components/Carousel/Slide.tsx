@@ -13,6 +13,8 @@ import { AboutMovie } from "./AboutMovie";
 import { Button } from "../ui";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+import { SildeLoading } from "./SildeLoading";
 
 type NowPlaying = {
   title: string;
@@ -21,23 +23,28 @@ type NowPlaying = {
   backdrop_path: string;
   id: number
 };
-export const Slide = () => {
+export const Slide = ({ vote_average, original_title, id }:MovieDetail) => {
+  const { push } = useRouter();
+  const handleGoToDetailPage = (id: string) => () => {
+    push(`/detail/${id}`);
+  };
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
-  const { data } = useFetchDataInClient(
+  const { data, isLoading } = useFetchDataInClient(
     "/movie/now_playing?language=en-US&page=1"
   );
 
   const nowPlaying: NowPlaying[] =
-    data?.results?.map((movie: any) => ({
+    data?.results?.map((movie: string) => ({
+      id: movie.id,
       title: movie.title,
       vote_average: movie.vote_average,
       overview: movie.overview,
       backdrop_path: movie.backdrop_path,
     })) ?? [];
   const plugin = React.useRef(
-    Autoplay({ delay: 10000, stopOnInteraction: true })
+    Autoplay({ delay: 3000, stopOnInteraction: true })
   );
 
   useEffect(() => {
@@ -69,6 +76,7 @@ export const Slide = () => {
       currentIndex === totalItems - 1 ? "hidden" : ""
     }`,
   };
+  
   return (
     <div className="relative h-127.5 md:h-150 w-screen max-w-full flex justify-center overflow-hidden">
       <Carousel
@@ -82,7 +90,7 @@ export const Slide = () => {
           {nowPlaying.map(
             ({ title, vote_average, overview, backdrop_path, id }, index) => (
               <CarouselItem key={index}>
-                <div className="">
+                <div onClick={handleGoToDetailPage(id)}>
                   <AboutMovie
                     title={title}
                     vote_average={vote_average}

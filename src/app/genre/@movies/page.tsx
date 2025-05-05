@@ -1,24 +1,27 @@
 import { MovieCard } from "@/components";
 import { axiosInstance } from "@/lib/axios-instance";
 import { GenreName } from "../components/GenreName";
+import { DynamicPagination } from "@/common/DynamicPagination";
+import page from "../page";
 
 type MovieGenreFilter = {
   searchParams: {
     genreIds?: string;
+    page?: number;
   };
 };
 
-const getMoviesByGenre = async (genreIds: string) => {
+const getMoviesByGenre = async (genreIds: string, page: number) => {
   const { data } = await axiosInstance(
-    `/discover/movie?language=en&with_genres=${genreIds}&page=1`
+    `/discover/movie?language=en&with_genres=${genreIds}&page=${page}`
   );
   return data.results;
 };
 
 const Movies = async ({
-  searchParams: { genreIds = "" },
+  searchParams: { genreIds = "", page = 1 },
 }: MovieGenreFilter) => {
-  const genreMovies = await getMoviesByGenre(genreIds);
+  const genreMovies = await getMoviesByGenre(genreIds, page);
 
   return (
     <div className="flex pt-8 md:pt-0">
@@ -34,6 +37,7 @@ const Movies = async ({
               <MovieCard key={index} {...movie} />
             ))}
         </div>
+        <DynamicPagination totalPage={Number(page)} />
       </div>
     </div>
   );
