@@ -2,7 +2,6 @@ import { MovieCard } from "@/components";
 import { axiosInstance } from "@/lib/axios-instance";
 import { GenreName } from "../components/GenreName";
 import { DynamicPagination } from "@/common/DynamicPagination";
-import page from "../page";
 
 type MovieGenreFilter = {
   searchParams: {

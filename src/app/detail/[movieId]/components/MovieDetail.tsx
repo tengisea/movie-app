@@ -20,8 +20,7 @@ export const MovieDetail = ({ detail, cast }: DetailProps) => {
   const genres = detail.genres;
   const backdropPath = detail.backdrop_path;
   const backdropUrl = `${process.env.TMDB_IMAGE_SERVICE_URL}/original${backdropPath}`;
-console.log(trailer);
-
+  
   return (
     <div className="flex flex-col px-5 md:px-30 gap-6">
       <div className="flex gap-10 md:justify-between">
@@ -64,7 +63,7 @@ console.log(trailer);
             className="md:hidden max-w-100"
           />
           <div className="fixed inset-0 z-50 bg-black/70 items-center justify-center hidden" id="trailerModal">
-            <div className="relative w-[80vw] h-[80vh]">
+            <div className=" w-[70vw] h-[70vh]">
               <button 
                 onClick={() => {
                   const modal = document.getElementById('trailerModal');
@@ -74,7 +73,6 @@ console.log(trailer);
                 }}
                 className="absolute -top-8 right-0 text-white hover:text-gray-300"
               >
-                Close
               </button>
               <iframe
                 width="100%"

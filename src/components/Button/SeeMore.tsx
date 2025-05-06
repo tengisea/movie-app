@@ -1,11 +1,11 @@
-import { Button } from '@/components/ui/button'
+
 import { ChevronRight } from 'lucide-react'
 
 
-export const SeeMore = () => {
+export const SeeMore = (handle:string) => {
   return (
-    <Button variant={"outline"} className="flex gap-2">
+    <button className="flex gap-2" onClick={handle}>
         See more <ChevronRight/>
-    </Button>
+    </button>
   )
 }

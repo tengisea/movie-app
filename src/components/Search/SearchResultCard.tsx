@@ -1,34 +1,84 @@
-"use client"
+"use client";
 
 import { useFetchDataInClient } from "@/hooks/useFetchDataClient";
 import { SearchLoading } from "./SearchLoading";
-import { MovieCard } from "../Movie";
+import { DynamicPagination } from "@/common/DynamicPagination";
+import { useRouter } from "next/navigation";
+import { Star } from "lucide-react";
+import { SeeMore } from "../Button";
+import { SearchNoResultsFound } from "./SearchNoResultsFound";
 
 type SearchValue = {
   searchValue: string;
+  page: number;
 };
-export const SearchResultCard = ({ searchValue }: SearchValue) => {
+
+export const SearchResultCard = ({ searchValue, page }: SearchValue) => {
   const { data, isLoading } = useFetchDataInClient(
-    `/search/movie?query=${searchValue}&language=en-US&page=page=1`
+    `/search/movie?query=${searchValue}&language=en-US&page=${page}`
   );
-  // console.log(data);
-  
+  if (isLoading) return <SearchLoading />;
 
-    if (isLoading) return <SearchLoading />;
+  const movies = data?.results ?? ([] as MovieDetail[]);
 
-  const inputValue = data?.results ?? [];
+  const { push } = useRouter();
 
+  const handleGoToDetailPage = (movieId: string) => () => {
+    push(`/detail/${id}`);
+  };
 
   return (
-    <div className="flex flex-wrap items-start content-start self-stretch gap-4 pt-3">
-      {inputValue.map(({ id, name }, index) => {
-        return (
-          <div
-            key={index}>
-            {name}
-          </div>
-        );
-      })}
+    <div>
+      {movies.length !== 0 && (
+        <div className="flex flex-col items-start content-start self-stretch gap-4 pt-3">
+          {movies
+            .map(
+              (
+                { id, title, vote_average, poster_path, release_date },
+                index
+              ) => {
+                return (
+                  <div key={index}>
+                    <div className="flex gap-4">
+                      <img
+                        src={`${process.env.TMDB_IMAGE_SERVICE_URL}/original${poster_path}`}
+                        alt=""
+                        width={67}
+                        height={100}
+                      />
+                      <div className="flex flex-col font-semibold ">
+                        <div className="text-xl font-semibold w-114">
+                          {title}
+                        </div>
+
+                        <div className="flex">
+                          <Star
+                            color="#FDE047"
+                            className="bg"
+                            fill="#FDE047"
+                            size={16}
+                          />
+                          {Math.round(Number(vote_average * 10)) / 10}
+                          <div className="text-[#71717A]">/10</div>
+                        </div>
+                        <div className="flex justify-between">
+                          {release_date}
+                          <SeeMore onClick={handleGoToDetailPage}></SeeMore>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+            )
+            .slice(0, 5)}
+          <button>See all results for "{searchValue}"</button>
+        </div>
+      )}:
+      <div className="flex justify-center items-center"><SearchNoResultsFound/></div>
+      <div className="hidden">
+        <DynamicPagination totalPage={Number(page)} />
+      </div>
     </div>
   );
-  }
+};
