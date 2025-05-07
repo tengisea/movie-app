@@ -1,0 +1,28 @@
+import { Footer, Header } from "@/components";
+import { ReactNode, Suspense } from "react";
+
+type SearchlayoutType = {
+  children: Readonly<ReactNode>;
+  genres: Readonly<React.ReactNode>;
+  movies: Readonly<React.ReactNode>;
+};
+const Searchlayout = ({ children, genres, movies }: SearchlayoutType) => {
+  return (
+    <div className="flex flex-col-reverse gap-8">
+      <Header />
+      <div className="flex flex-col gap-8 px-5 md:px-25">
+        <div className="text-3xl font-semibold">Search results</div>
+        <div className="md:flex">
+          <div>
+            <Suspense fallback={<div>Loading</div>}>{genres}</Suspense>
+          </div>
+          <Suspense fallback={<div>Movie loading</div>}>{movies}</Suspense>
+        </div>
+      </div>
+      {children}
+      <Footer />
+    </div>
+  );
+};
+
+export default Searchlayout;

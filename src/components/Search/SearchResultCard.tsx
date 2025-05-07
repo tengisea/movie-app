@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { Star } from "lucide-react";
 import { SeeMore } from "../Button";
 import { SearchNoResultsFound } from "./SearchNoResultsFound";
+import { useURLSearchParams } from "@/hooks/useURLSearchParams";
 
 type SearchValue = {
   searchValue: string;
@@ -14,6 +15,7 @@ type SearchValue = {
 };
 
 export const SearchResultCard = ({ searchValue, page }: SearchValue) => {
+    const { selectedGenresIds, generateQueryParams } = useURLSearchParams();
   const { data, isLoading } = useFetchDataInClient(
     `/search/movie?query=${searchValue}&language=en-US&page=${page}`
   );
@@ -23,15 +25,25 @@ export const SearchResultCard = ({ searchValue, page }: SearchValue) => {
 
   const { push } = useRouter();
 
-  const handleGoToDetailPage = (movieId: string) => () => {
-    push(`/detail/${id}`);
+  // const handleGoToSearchPage = (movieId: string) => () => {
+  //   push(`/search/${searchValue}`);
+  // };
+
+  const handleGoToDetailPage = (movieId: number) => () => {
+    push(`/detail/${movieId}`);
   };
 
+    const handleGoToSearchPage = (searchValue: string) => () => {
+      const newPath = generateQueryParams(searchValue);
+      push(newPath);
+    };
+
   return (
-    <div>
+    <>
       {movies.length !== 0 && (
         <div className="flex flex-col items-start content-start self-stretch gap-4 pt-3">
           {movies
+            .slice(0, 5)
             .map(
               (
                 { id, title, vote_average, poster_path, release_date },
@@ -39,7 +51,7 @@ export const SearchResultCard = ({ searchValue, page }: SearchValue) => {
               ) => {
                 return (
                   <div key={index}>
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 border-b-1 pb-3">
                       <img
                         src={`${process.env.TMDB_IMAGE_SERVICE_URL}/original${poster_path}`}
                         alt=""
@@ -63,22 +75,30 @@ export const SearchResultCard = ({ searchValue, page }: SearchValue) => {
                         </div>
                         <div className="flex justify-between">
                           {release_date}
-                          <SeeMore onClick={handleGoToDetailPage}></SeeMore>
+                          <SeeMore handle={handleGoToDetailPage} id={id} />
                         </div>
                       </div>
                     </div>
                   </div>
                 );
               }
-            )
-            .slice(0, 5)}
-          <button>See all results for "{searchValue}"</button>
+            )}
+          <button
+            onClick={handleGoToSearchPage(searchValue)}
+            className="font-medium text-sm px-4 py-2 border-1 rounded">
+            See all results for "{searchValue}"
+          </button>
         </div>
-      )}:
-      <div className="flex justify-center items-center"><SearchNoResultsFound/></div>
+      )}
+      :
+      {
+        <div className="flex justify-center items-center">
+          <SearchNoResultsFound />
+        </div>
+      }
       <div className="hidden">
         <DynamicPagination totalPage={Number(page)} />
       </div>
-    </div>
+    </>
   );
 };

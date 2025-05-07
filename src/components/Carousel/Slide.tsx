@@ -16,14 +16,14 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { SildeLoading } from "./SildeLoading";
 
-type NowPlaying = {
+type NowPlayingProps = {
   title: string;
   vote_average: number;
   overview: string;
   backdrop_path: string;
   id: number
 };
-export const Slide = ({ vote_average, original_title, id }:MovieDetail) => {
+export const Slide = () => {
   const { push } = useRouter();
   const handleGoToDetailPage = (id: string) => () => {
     push(`/detail/${id}`);
@@ -35,7 +35,7 @@ export const Slide = ({ vote_average, original_title, id }:MovieDetail) => {
     "/movie/now_playing?language=en-US&page=1"
   );
 
-  const nowPlaying: NowPlaying[] =
+  const nowPlaying: NowPlayingProps[] =
     data?.results?.map((movie: string) => ({
       id: movie.id,
       title: movie.title,
@@ -124,6 +124,7 @@ export const Slide = ({ vote_average, original_title, id }:MovieDetail) => {
       </div>
       <div className="absolute top-14/15 flex space-x-2 justify-center items-end hidden md:block">
         {Array.from({ length: totalItems })
+          .slice(0, 5)
           .map((_, index) => (
             <button
               key={index}
@@ -132,8 +133,7 @@ export const Slide = ({ vote_average, original_title, id }:MovieDetail) => {
                 currentIndex === index ? "bg-white" : "bg-gray-300"
               }`}
             />
-          ))
-          .slice(0, 5)}
+          ))}
       </div>
     </div>
   );

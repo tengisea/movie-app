@@ -14,9 +14,9 @@ export const Popular = async ({ popular }: PopularProps) => {
       </header>
 
       <div className="flex justify-center flex-wrap gap-8 ">
-        {popular
-          .map((movie, index) => <MovieCard key={index} {...movie} />)
-          .slice(0, 10)}
+        {popular.slice(0, 10).map((movie, index) => (
+          <MovieCard key={index} {...movie} />
+        ))}
       </div>
     </div>
   );

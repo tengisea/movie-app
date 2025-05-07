@@ -15,9 +15,9 @@ export const Upcoming = ({ upcoming }: UpcomingProps) => {
       </header>
 
       <div className="flex justify-center flex-wrap gap-5 md:gap-8 ">
-        {upcoming.map((movie, index) => (
+        {upcoming.slice(0, 10).map((movie, index) => (
           <MovieCard key={index} {...movie} />
-        )).slice(0, 10)}
+        ))}
       </div>
     </div>
   );
