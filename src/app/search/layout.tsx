@@ -8,15 +8,15 @@ type SearchlayoutType = {
 };
 const Searchlayout = ({ children, genres, movies }: SearchlayoutType) => {
   return (
-    <div className="flex flex-col-reverse gap-8">
+    <div className="flex flex-col gap-8">
       <Header />
       <div className="flex flex-col gap-8 px-5 md:px-25">
         <div className="text-3xl font-semibold">Search results</div>
-        <div className="md:flex">
+        <div className="md:flex gap-7">
           <div>
-            <Suspense fallback={<div>Loading</div>}>{genres}</Suspense>
+            <Suspense fallback={<div>Movie loading</div>}>{movies}</Suspense>
           </div>
-          <Suspense fallback={<div>Movie loading</div>}>{movies}</Suspense>
+          <Suspense fallback={<div>Loading</div>}>{genres}</Suspense>
         </div>
       </div>
       {children}

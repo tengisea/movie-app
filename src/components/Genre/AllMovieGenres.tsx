@@ -29,7 +29,7 @@ export const AllMovieGenres = () => {
   };
 
   return (
-    <div className="flex flex-wrap items-start content-start self-stretch gap-4 pt-3">
+    <div className="flex flex-wrap items-start content-start self-stretch gap-4 pt-3 w-[335px]">
       {genres.map(({ id, name }, index) => {
         const genreId = id.toString();
         const isSelected = selectedGenresIds.includes(genreId);

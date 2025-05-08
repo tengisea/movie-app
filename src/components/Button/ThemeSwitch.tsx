@@ -11,7 +11,7 @@ export const ThemeSwitch = () => {
   return (
     <div className="ml-3">
       <Button variant="outline" size="icon" onClick={handleTheme}>
-        {/* {isDark ? <Sun/>  :  <Moon/>} */}
+        {isDark ? <Sun/>  :  <Moon/>}
       </Button>
     </div>
   );

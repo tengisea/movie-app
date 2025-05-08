@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import { Star } from "lucide-react";
 import { SeeMore } from "../Button";
 import { SearchNoResultsFound } from "./SearchNoResultsFound";
-import { useURLSearchParams } from "@/hooks/useURLSearchParams";
 
 type SearchValue = {
   searchValue: string;
@@ -15,7 +14,7 @@ type SearchValue = {
 };
 
 export const SearchResultCard = ({ searchValue, page }: SearchValue) => {
-    const { selectedGenresIds, generateQueryParams } = useURLSearchParams();
+  const { push } = useRouter();
   const { data, isLoading } = useFetchDataInClient(
     `/search/movie?query=${searchValue}&language=en-US&page=${page}`
   );
@@ -23,24 +22,17 @@ export const SearchResultCard = ({ searchValue, page }: SearchValue) => {
 
   const movies = data?.results ?? ([] as MovieDetail[]);
 
-  const { push } = useRouter();
-
-  // const handleGoToSearchPage = (movieId: string) => () => {
-  //   push(`/search/${searchValue}`);
-  // };
+  const handleGoToSearch = (searchValue: string) => () => {
+    push(`/search?searchValue=${searchValue}`);
+  };
 
   const handleGoToDetailPage = (movieId: number) => () => {
     push(`/detail/${movieId}`);
   };
 
-    const handleGoToSearchPage = (searchValue: string) => () => {
-      const newPath = generateQueryParams(searchValue);
-      push(newPath);
-    };
-
   return (
     <>
-      {movies.length !== 0 && (
+      {movies.length !== 0 ? (
         <div className="flex flex-col items-start content-start self-stretch gap-4 pt-3">
           {movies
             .slice(0, 5)
@@ -73,7 +65,7 @@ export const SearchResultCard = ({ searchValue, page }: SearchValue) => {
                           {Math.round(Number(vote_average * 10)) / 10}
                           <div className="text-[#71717A]">/10</div>
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex gap-13 md:gap-0 md:justify-between">
                           {release_date}
                           <SeeMore handle={handleGoToDetailPage} id={id} />
                         </div>
@@ -84,18 +76,17 @@ export const SearchResultCard = ({ searchValue, page }: SearchValue) => {
               }
             )}
           <button
-            onClick={handleGoToSearchPage(searchValue)}
+            onClick={handleGoToSearch(searchValue)}
             className="font-medium text-sm px-4 py-2 border-1 rounded">
             See all results for "{searchValue}"
           </button>
         </div>
-      )}
-      :
-      {
+      ) : (
         <div className="flex justify-center items-center">
           <SearchNoResultsFound />
         </div>
-      }
+      )}
+
       <div className="hidden">
         <DynamicPagination totalPage={Number(page)} />
       </div>

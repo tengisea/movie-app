@@ -2,6 +2,7 @@
 
 import { Play, Star } from "lucide-react";
 import { Badge } from "@/components/ui";
+import YouTube, { YouTubeProps } from "react-youtube";
 
 type DetailProps = {
   detail: MovieDetailProps[];
@@ -20,7 +21,20 @@ export const MovieDetail = ({ detail, cast }: DetailProps) => {
   const genres = detail.genres;
   const backdropPath = detail.backdrop_path;
   const backdropUrl = `${process.env.TMDB_IMAGE_SERVICE_URL}/original${backdropPath}`;
-  
+
+    const onPlayerReady: YouTubeProps["onReady"] = (event) => {
+      event.target.pauseVideo();
+    };
+
+      const opts: YouTubeProps["opts"] = {
+        height: "390",
+        width: "640",
+        playerVars: {
+          // https://developers.google.com/youtube/player_parameters
+          autoplay: 1,
+        },
+      };
+
   return (
     <div className="flex flex-col px-5 md:px-30 gap-6">
       <div className="flex gap-10 md:justify-between">
@@ -46,8 +60,8 @@ export const MovieDetail = ({ detail, cast }: DetailProps) => {
           </div>
         </div>
       </div>
-      <div className="flex md:flex-col gap-8.5 ">
-        <div className="flex gap-2">
+      <div className="flex flex-col md:flex-col gap-8.5 ">
+        <div className="flex flex-col-reverse md:flex-row gap-8 md:gap-2">
           <img
             src={imageUrl}
             width={290}
@@ -62,47 +76,33 @@ export const MovieDetail = ({ detail, cast }: DetailProps) => {
             alt=""
             className="md:hidden max-w-100"
           />
-          <div className="fixed inset-0 z-50 bg-black/70 items-center justify-center hidden" id="trailerModal">
-            <div className=" w-[70vw] h-[70vh]">
-              <button 
-                onClick={() => {
-                  const modal = document.getElementById('trailerModal');
-                  if (modal) modal.classList.add('hidden');
-                  const iframe = document.querySelector('iframe');
-                  if (iframe) iframe.src = {trailer};
-                }}
-                className="absolute -top-8 right-0 text-white hover:text-gray-300"
-              >
-              </button>
-              <iframe
-                width="100%"
-                height="100%"
-                src={trailer}
-                title="Movie Trailer"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+          <div
+            className="fixed inset-0 z-50 bg-black/70 items-center justify-center hidden"
+            id="trailerModal">
+            <div className="w-[100vw] md:w-[70vw] h-[40vh] md:h-[70vh]">
+              <YouTube
+                videoId="2g811Eo7K8U"
+                opts={opts}
+                onReady={onPlayerReady}
+              />
             </div>
           </div>
-            <div onClick={() => {
-              const modal = document.getElementById('trailerModal');
-              if (modal) modal.classList.remove('hidden');
-            }}
-            className="w-[760px] h-107 relative opacity-50 rounded overflow-hidden bg-center bg-contain  bg-no-repeat"
+          <div
+          
+            className="w-[375px] md:w-[760px] h-[211px] md:h-107 relative opacity-50 rounded overflow-hidden bg-center bg-contain  bg-no-repeat"
             style={{ backgroundImage: `url(${backdropUrl})` }}>
-            <div className="left-[24px] top-[364px] absolute inline-flex justify-start items-center gap-3">
+            <div className="left-2 top-40 md:left-[24px] md:top-[364px] absolute inline-flex justify-start items-center gap-3">
               <div className="w-10 h-10 bg-white rounded-full flex justify-center items-center gap-2">
-              <Play color="black" size={16}/>
+                <Play color="black" size={16} />
               </div>
-              <div className="justify-start text-white">Play trailer </div>
+              <div className="justify-start ">Play trailer </div>
             </div>
-            </div>
+          </div>
         </div>
 
         <div className="flex self-stretch flex-wrap gap-5">
           <div className="flex gap-3 self-stretch flex-wrap">
             {genres.map(({ id, name }, index) => {
-              const genreId = id.toString();
               return (
                 <Badge
                   variant={"outline"}
@@ -118,19 +118,21 @@ export const MovieDetail = ({ detail, cast }: DetailProps) => {
       </div>
       <div className="flex flex-col gap-5">
         <div className="flex gap-13">
-          <div className="font-bold w-16">Director</div>
-          <div>{cast.crew[0].name}</div>
+          <div className="font-bold w-18 ">Director</div>
+          <div>{cast.crew?.[0]?.name}</div>
         </div>
         <div className="flex gap-13 ">
-          <div className="font-bold w-17">Writers</div>
+          <div className="font-bold w-22">Writers</div>
           <div>
-            {cast.crew[1].name} · {cast.crew[2].name} · {cast.crew[3].name}
+            {cast.crew?.[1]?.name} · {cast.crew?.[2]?.name} ·{" "}
+            {cast.crew?.[3]?.name}
           </div>
         </div>
         <div className="flex gap-13">
-          <div className="font-bold w-24">Stars</div>
+          <div className="font-bold w-25">Stars</div>
           <div>
-            {cast.cast[0].name} · {cast.cast[1].name} · {cast.cast[2].name}
+            {cast.cast?.[0]?.name} · {cast.cast?.[1]?.name} ·{" "}
+            {cast.cast?.[2]?.name}
           </div>
         </div>
       </div>

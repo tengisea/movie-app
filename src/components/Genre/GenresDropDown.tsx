@@ -15,7 +15,9 @@ export const GenresDropDown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline"><ChevronDown/> <span className="hidden md:block">Genre</span></Button>
+        <Button variant="outline">
+          <ChevronDown /> <span className="hidden md:block">Genre</span>
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-73.5 md:w-144.25 p-5">
         <DropdownMenuLabel className="font-bold">Genres</DropdownMenuLabel>
@@ -24,7 +26,7 @@ export const GenresDropDown = () => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem className=" w-[375px]">
             <AllMovieGenres />
           </DropdownMenuItem>
         </DropdownMenuRadioGroup>

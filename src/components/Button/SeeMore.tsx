@@ -7,9 +7,10 @@ type SeeMoreProps = {
 };
 
 export const SeeMore = ({ handle, id }: SeeMoreProps) => {
+  
   return (
     <button className="flex gap-2"
-    //  onClick={ handle(id) }
+     onClick={ handle(id) }
      >
       See more <ChevronRight />
     </button>

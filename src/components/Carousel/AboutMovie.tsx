@@ -45,7 +45,7 @@ export const AboutMovie = ({
               <div className="text-[#71717A]">/10</div>
             </div>
             <div className="text-sm max-w-xl w-75">{overview}</div>
-            <Button className="w-36.5">
+            <Button className="w-36.5" >
               <Play /> Watch Trailer
             </Button>
           </div>

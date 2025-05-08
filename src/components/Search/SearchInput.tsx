@@ -6,8 +6,6 @@ import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 
@@ -36,7 +34,7 @@ export const SearchInput = () => {
         {searchValue && (
           <DropdownMenuContent
             align="center"
-            className="absolute right- ml-250 mt-15 w-73.5 md:w-144.5 p-3  rounded">
+            className="absolute ml-11 md:ml-220 mt-15 w-83.5 md:w-144.5 p-3  rounded">
             <DropdownMenuItem>
               <SearchResultCard searchValue={searchValue} page={1} />
             </DropdownMenuItem>
