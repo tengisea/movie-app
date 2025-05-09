@@ -14,9 +14,19 @@ const Genrelayout = ({ children, genres, movies }: GenreLayoutType) => {
         <div className="text-3xl font-semibold">Search filter</div>
         <div className="md:flex">
           <div>
-            <Suspense fallback={<div>Loading</div>}>{genres}</Suspense>
+            <Suspense
+              fallback={
+                <div className="flex justify-center animate-spin size-6 border-3 border-current border-t-transparent text-gray-800 rounded-full dark:text-white"></div>
+              }>
+              {genres}
+            </Suspense>
           </div>
-          <Suspense fallback={<div>Movie loading</div>}>{movies}</Suspense>
+          <Suspense
+            fallback={
+              <div className="flex justify-center animate-spin size-6 border-3 border-current border-t-transparent text-gray-800 rounded-full dark:text-white"></div>
+            }>
+            {movies}
+          </Suspense>
         </div>
       </div>
       {children}

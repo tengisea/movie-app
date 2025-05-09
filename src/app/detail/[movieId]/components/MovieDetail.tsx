@@ -3,6 +3,8 @@
 import { Play, Star } from "lucide-react";
 import { Badge } from "@/components/ui";
 import YouTube, { YouTubeProps } from "react-youtube";
+import { use } from "react";
+import { useFetchDataInClient } from "@/hooks/useFetchDataClient";
 
 type DetailProps = {
   detail: MovieDetailProps[];
@@ -17,23 +19,27 @@ export const MovieDetail = ({ detail, cast }: DetailProps) => {
   const voteSimplifier = Math.round(Number(vote * 10)) / 10;
   const imageUrl = `${process.env.TMDB_IMAGE_SERVICE_URL}/original${posterPath}`;
   const phoneImageurl = `${process.env.TMDB_IMAGE_SERVICE_URL}/original${posterPath}`;
-  const trailer = `/movie/${detail.id}/videos?language=en-US`;
+  const { data } = useFetchDataInClient(
+    `/movie/${detail.id}/videos?language=en-US`
+  );
+  (data as any) ?? [];
+  const trailer = data?.results?.[0]?.key;
   const genres = detail.genres;
   const backdropPath = detail.backdrop_path;
   const backdropUrl = `${process.env.TMDB_IMAGE_SERVICE_URL}/original${backdropPath}`;
+  console.log(trailer);
 
-    const onPlayerReady: YouTubeProps["onReady"] = (event) => {
-      event.target.pauseVideo();
-    };
+  const onPlayerReady: YouTubeProps["onReady"] = (event) => {
+    event.target.pauseVideo();
+  };
 
-      const opts: YouTubeProps["opts"] = {
-        height: "390",
-        width: "640",
-        playerVars: {
-          // https://developers.google.com/youtube/player_parameters
-          autoplay: 1,
-        },
-      };
+  const opts: YouTubeProps["opts"] = {
+    height: "70%",
+    width: "100%",
+    playerVars: {
+      autoplay: 1,
+    },
+  };
 
   return (
     <div className="flex flex-col px-5 md:px-30 gap-6">
@@ -79,30 +85,40 @@ export const MovieDetail = ({ detail, cast }: DetailProps) => {
           <div
             className="fixed inset-0 z-50 bg-black/70 items-center justify-center hidden"
             id="trailerModal">
-            <div className="w-[100vw] md:w-[70vw] h-[40vh] md:h-[70vh]">
-              <YouTube
-                videoId="2g811Eo7K8U"
-                opts={opts}
-                onReady={onPlayerReady}
-              />
-            </div>
+            <YouTube
+              videoId={trailer}
+              opts={opts}
+              onReady={onPlayerReady}
+              className="w-[100vw] md:w-[80vw] h-[70vw] md:h-[70vw]"
+            />
           </div>
           <div
-          
-            className="w-[375px] md:w-[760px] h-[211px] md:h-107 relative opacity-50 rounded overflow-hidden bg-center bg-contain  bg-no-repeat"
+            className="w-[375px] md:w-[800px] h-[211px] md:h-107 relative opacity-80 dark:opacity-50 rounded overflow-hidden bg-center bg-contain  bg-no-repeat"
             style={{ backgroundImage: `url(${backdropUrl})` }}>
             <div className="left-2 top-40 md:left-[24px] md:top-[364px] absolute inline-flex justify-start items-center gap-3">
-              <div className="w-10 h-10 bg-white rounded-full flex justify-center items-center gap-2">
+              <div
+                className="w-10 h-10 bg-white rounded-full flex justify-center items-center gap-2 cursor-pointer"
+                onClick={() => {
+                  const modal = document.getElementById("trailerModal");
+                  if (modal) {
+                    modal.style.display = "flex";
+                    modal.onclick = (e) => {
+                      if (e.target == modal) {
+                        modal.style.display = "none";
+                      }
+                    };
+                  }
+                }}>
                 <Play color="black" size={16} />
               </div>
-              <div className="justify-start ">Play trailer </div>
+              <div className="justify-start text-white dark:text-gray-200 ">Play trailer </div>
             </div>
           </div>
         </div>
 
         <div className="flex self-stretch flex-wrap gap-5">
           <div className="flex gap-3 self-stretch flex-wrap">
-            {genres.map(({ id, name }, index) => {
+            {genres.map(({ name }, index) => {
               return (
                 <Badge
                   variant={"outline"}

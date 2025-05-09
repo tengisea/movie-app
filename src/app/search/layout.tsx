@@ -1,5 +1,6 @@
 import { Footer, Header } from "@/components";
 import { ReactNode, Suspense } from "react";
+import { Skeleton } from "@/components/ui";
 
 type SearchlayoutType = {
   children: Readonly<ReactNode>;
@@ -14,9 +15,19 @@ const Searchlayout = ({ children, genres, movies }: SearchlayoutType) => {
         <div className="text-3xl font-semibold">Search results</div>
         <div className="md:flex gap-7">
           <div>
-            <Suspense fallback={<div>Movie loading</div>}>{movies}</Suspense>
+            <Suspense
+              fallback={
+                <div className="flex justify-center animate-spin size-6 border-3 border-current border-t-transparent text-gray-800 rounded-full dark:text-white"></div>
+              }>
+              {movies}
+            </Suspense>
           </div>
-          <Suspense fallback={<div>Loading</div>}>{genres}</Suspense>
+          <Suspense
+            fallback={
+              <div className="flex justify-center animate-spin size-6 border-3 border-current border-t-transparent text-gray-800 rounded-full dark:text-white"></div>
+            }>
+            {genres}
+          </Suspense>
         </div>
       </div>
       {children}

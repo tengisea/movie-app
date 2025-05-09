@@ -21,7 +21,7 @@ type NowPlayingProps = {
   vote_average: number;
   overview: string;
   backdrop_path: string;
-  id: number
+  id: number;
 };
 export const Slide = () => {
   const { push } = useRouter();
@@ -31,6 +31,7 @@ export const Slide = () => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
+
   const { data, isLoading } = useFetchDataInClient(
     "/movie/now_playing?language=en-US&page=1"
   );
@@ -76,9 +77,11 @@ export const Slide = () => {
       currentIndex === totalItems - 1 ? "hidden" : ""
     }`,
   };
-  
+
+  if (isLoading) return <SildeLoading />;
+
   return (
-    <div className="relative h-127.5 md:h-150 w-screen max-w-full flex justify-center overflow-hidden">
+    <div className="relative h-full md:h-150 w-screen max-w-full flex justify-center overflow-hidden">
       <Carousel
         plugins={[plugin.current]}
         className="w-screen max-h-[550px]"
@@ -122,7 +125,7 @@ export const Slide = () => {
           </div>
         </Button>
       </div>
-      <div className="absolute top-14/15 flex space-x-2 justify-center items-end hidden md:block">
+      <div className="absolute top-14/15 space-x-2 justify-center items-end hidden md:block">
         {Array.from({ length: totalItems })
           .slice(0, 5)
           .map((_, index) => (

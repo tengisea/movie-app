@@ -9,5 +9,6 @@ declare namespace NodeJS {
       TMDB_TOP_RATED: string;
       TMDB_MOVIE_DETAIL: string;
       TMDB_MOVIE_GENRE: string;
+      TMDB_MOVIE_TRAILER: string;
     }
 }
