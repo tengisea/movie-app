@@ -30,8 +30,9 @@ export const AboutMovie = ({
   const vote = Number(`${vote_average}`);
   const voteSimplifier = Math.round(Number(vote * 10)) / 10;
   const backdropUrl = `https://image.tmdb.org/t/p/original/${backdrop_path}`;
+
   const { data } = useFetchDataInClient(`/movie/${id}/videos?language=en-US`);
-  (data as any) ?? [];
+  (data as string) ?? [];
   const trailer = data?.results?.[0]?.key;
 
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {

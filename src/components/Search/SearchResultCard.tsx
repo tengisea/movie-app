@@ -78,7 +78,7 @@ export const SearchResultCard = ({ searchValue, page }: SearchValue) => {
           <button
             onClick={handleGoToSearch(searchValue)}
             className="font-medium text-sm px-4 py-2 border-1 rounded">
-            See all results for "{searchValue}"
+            See all results for &quot;{searchValue}&quot;
           </button>
         </div>
       ) : (

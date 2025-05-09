@@ -1,6 +1,6 @@
-import { SeeMore, SeeMoreForMovies } from "./Button";
+import { SeeMoreForMovies } from "./Button";
 import { MovieCard} from "./Movie";
-import { Skeleton } from "@/components/ui/skeleton";
+
 
 type UpcomingProps = {
   upcoming: MovieDetail[];

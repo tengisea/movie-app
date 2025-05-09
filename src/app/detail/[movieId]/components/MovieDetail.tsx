@@ -3,7 +3,6 @@
 import { Play, Star } from "lucide-react";
 import { Badge } from "@/components/ui";
 import YouTube, { YouTubeProps } from "react-youtube";
-import { use } from "react";
 import { useFetchDataInClient } from "@/hooks/useFetchDataClient";
 
 type DetailProps = {
@@ -19,15 +18,15 @@ export const MovieDetail = ({ detail, cast }: DetailProps) => {
   const voteSimplifier = Math.round(Number(vote * 10)) / 10;
   const imageUrl = `${process.env.TMDB_IMAGE_SERVICE_URL}/original${posterPath}`;
   const phoneImageurl = `${process.env.TMDB_IMAGE_SERVICE_URL}/original${posterPath}`;
-  const { data } = useFetchDataInClient(
-    `/movie/${detail.id}/videos?language=en-US`
-  );
-  (data as any) ?? [];
-  const trailer = data?.results?.[0]?.key;
   const genres = detail.genres;
   const backdropPath = detail.backdrop_path;
   const backdropUrl = `${process.env.TMDB_IMAGE_SERVICE_URL}/original${backdropPath}`;
-  console.log(trailer);
+
+  const { data } = useFetchDataInClient(
+    `/movie/${detail.id}/videos?language=en-US`
+  );
+  (data as string) ?? [];
+  const trailer = data?.results?.[0]?.key;
 
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
     event.target.pauseVideo();

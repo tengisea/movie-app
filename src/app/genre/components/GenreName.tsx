@@ -19,7 +19,7 @@ export const GenreName = async ({ genreIds }: GenreIdsProps) => {
 
   return (
     <div className="flex flex-wrap">
-        titles in "
+      titles in &quot;
       {genreName
         .filter((genre) => genreIds.includes(genre.id.toString()))
         .map((genre, index, filteredArray) => (
@@ -27,7 +27,8 @@ export const GenreName = async ({ genreIds }: GenreIdsProps) => {
             {genre.name}
             {index < filteredArray.length - 1 ? ", " : ""}
           </div>
-        ))}"
+        ))}
+      &quot;
     </div>
   );
 };

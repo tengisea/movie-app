@@ -1,7 +1,6 @@
 "use client";
 import { Search } from "lucide-react";
 import { SearchResultCard } from "./SearchResultCard";
-import { Button } from "../ui";
 import { useState } from "react";
 import {
   DropdownMenu,

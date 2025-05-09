@@ -28,10 +28,12 @@ const MoviesSearch = async ({
       <div className=""></div>
       <div className=" flex flex-col gap-8">
         <div className="flex font-semibold text-xl md:text-2xl gap-1">
-          {searchMovies.length} results for "{searchValue}"
+          {searchMovies.length} results for &quot;{searchValue}&quot;
         </div>
         {searchMovies.length === 0 ? (
-          <div className="font-medium text-sm h-24 flex justify-center items-center px-5 py-6">No results found</div>
+          <div className="font-medium text-sm h-24 flex justify-center items-center px-5 py-6">
+            No results found
+          </div>
         ) : (
           <div></div>
         )}
@@ -41,8 +43,11 @@ const MoviesSearch = async ({
               <MovieCard key={index} {...movie} />
             ))}
         </div>
-       {searchValue.length ===0 ? <div></div>:
-        <DynamicPagination totalPage={Number(page)} /> }
+        {searchValue.length === 0 ? (
+          <div></div>
+        ) : (
+          <DynamicPagination totalPage={Number(page)} />
+        )}
       </div>
     </div>
   );

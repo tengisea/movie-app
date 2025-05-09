@@ -9,13 +9,6 @@ import { Button } from "@/components/ui/button";
 import { Search, X } from "lucide-react";
 
 export const SearchForSearchPage = () => {
-    const [searchValue, setSearchvalue] = useState("");
-    const [open, setOpen] = useState(false);
-
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchvalue(event.target.value);
-      setOpen(true);
-    };
   const [showSearch, setShowSearch] = useState(false);
   const handleSearchButtonClick = () => {
     setShowSearch(!showSearch);

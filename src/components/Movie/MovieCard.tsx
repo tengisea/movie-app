@@ -2,7 +2,6 @@
 import { MovieImage, MovieTitle } from ".";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "../ui";
-
 export const MovieCardSkeleton = () => {
   return (
     <div className="rounded-lg flex flex-col items-start gap-1 bg-[#F4F4F5] dark:bg-[#27272A]">
@@ -23,7 +22,7 @@ export const MovieCard = ({
 }: MovieDetail) => {
   const { push } = useRouter();
 
-  const handleGoToDetailPage = (movieId: string) => () => {
+  const handleGoToDetailPage = () => () => {
     push(`/detail/${id}`);
   };
   

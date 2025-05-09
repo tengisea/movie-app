@@ -7,11 +7,6 @@ import { useURLSearchParams } from "@/hooks/useURLSearchParams";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
-type Genre = {
-  id: number;
-  name: string;
-};
-
 export const AllMovieGenres = () => {
   const { push } = useRouter();
   const { selectedGenresIds, generateQueryParams } = useURLSearchParams();

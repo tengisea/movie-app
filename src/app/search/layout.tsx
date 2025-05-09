@@ -1,6 +1,5 @@
 import { Footer, Header } from "@/components";
 import { ReactNode, Suspense } from "react";
-import { Skeleton } from "@/components/ui";
 
 type SearchlayoutType = {
   children: Readonly<ReactNode>;

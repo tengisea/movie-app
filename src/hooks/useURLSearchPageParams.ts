@@ -8,7 +8,7 @@ export const useURLSearchPageParams = () => {
   const selectedGenresIds =
     searchParams.get("search")?.split(",").filter(Boolean) ?? [];
 
-  const generateQueryParams = (searchValue: string) => {
+  const generateQueryParams = () => {
     const queryParams = new URLSearchParams();
 
     const newParams = queryParams.toString();

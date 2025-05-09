@@ -1,5 +1,4 @@
 import { ChevronRight } from "lucide-react";
-import { MouseEvent } from "react";
 
 type SeeMoreProps = {
   id: number;
